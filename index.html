@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wedding Invitation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Telugu:wght@700&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      min-height: 100vh;
+      min-width: 100vw;
+      height: 100vh;
+      width: 100vw;
+      font-family: 'Segoe UI', 'Noto Serif Telugu', sans-serif;
+      background: linear-gradient(135deg, #fff8e1 0%, #ffe0b2 100%);
+      color: #333;
+      overflow-x: hidden;
+      position: relative;
+    }
+    .confetti, .hearts, .flowers {
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .roses {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      transform: translateX(-50%);
+      width: 120px;
+      z-index: 2;
+      animation: rosesDrop 2.5s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    .roses-bottom {
+      top: unset;
+      bottom: 0;
+      transform: translateX(-50%) rotate(180deg);
+      animation: rosesDrop 2.5s cubic-bezier(.68,-0.55,.27,1.55) reverse;
+    }
+    @keyframes rosesDrop {
+      0% { opacity: 0; transform: translateX(-50%) translateY(-60px);}
+      100% { opacity: 1; transform: translateX(-50%) translateY(0);}
+    }
+    header {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      padding: 2rem 1rem 1rem 1rem;
+      text-align: center;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 4px 24px rgba(255, 183, 77, 0.13);
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.7rem;
+      font-family: 'Great Vibes', cursive;
+      color: #b71c1c;
+      letter-spacing: 2px;
+      text-shadow: 0 2px 8px #ffd180;
+      animation: titlePop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes titlePop {
+      0% { transform: scale(0.7); opacity: 0; }
+      80% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1); }
+    }
+    header select {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ffd180;
+      font-size: 1rem;
+    }
+    .countdown {
+      text-align: center;
+      font-size: 2rem;
+      margin: 1rem 0;
+      color: #d72638;
+      font-weight: bold;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 4px #ffe0b2;
+      animation: fadeIn 2s;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto 2rem auto;
+      padding: 2rem 1rem;
+      background: rgba(255,255,255,0.97);
+      border-radius: 24px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 1;
+    }
+    .couple-row {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2.5em;
+      margin: 2em 0 2.2em 0;
+    }
+    .person {
+      text-align: center;
+      animation: personPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes personPop {
+      0% { transform: scale(0.7) rotate(-8deg); opacity: 0; }
+      80% { transform: scale(1.08) rotate(2deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0deg);}
+    }
+    .person img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 6px solid #ffd180;
+      box-shadow: 0 6px 24px #ffd180;
+      object-fit: cover;
+      animation: imgBounce 1.5s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes imgBounce {
+      0% { transform: scale(0.6); opacity: 0; }
+      60% { transform: scale(1.1); opacity: 1; }
+      100% { transform: scale(1);}
+    }
+    .person-name {
+      margin-top: 0.7em;
+      font-weight: bold;
+      font-size: 1.25em;
+      color: #d84315;
+      letter-spacing: 1px;
+      text-shadow: 0 1px 4px #ffe0b2;
+    }
+    .and {
+      font-size: 2.5em;
+      color: #b71c1c;
+      margin: 0 0.2em;
+      font-family: 'Great Vibes', cursive;
+      animation: andAnim 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes andAnim {
+      0% { transform: scale(0.5) rotate(-20deg); opacity: 0; }
+      80% { transform: scale(1.2) rotate(10deg); opacity: 1; }
+      100% { transform: scale(1) rotate(0);}
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    .story, .event, .gallery, .rsvp, .guestbook {
+      margin-bottom: 2.5rem;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 200px;
+      margin: 0.5rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #ffd180;
+      transition: transform 0.3s;
+    }
+    .gallery img:hover {
+      transform: scale(1.07) rotate(-2deg);
+      box-shadow: 0 8px 24px #ffd180;
+    }
+    .event p, .venue {
+      font-size: 1.1em;
+      color: #4e342e;
+      font-weight: 500;
+    }
+    .venue {
+      background: #fff3e0;
+      border-radius: 14px;
+      padding: 18px;
+      margin: 1.4em 0 1.7em 0;
+      box-shadow: 0 2px 12px rgba(255, 183, 77, 0.13);
+      animation: fadeIn 2s 1s backwards;
+      position: relative;
+    }
+    .venue .marker {
+      display: inline-block;
+      background: #d72638;
+      color: #fff;
+      border-radius: 50%;
+      width: 1.2em;
+      height: 1.2em;
+      text-align: center;
+      line-height: 1.2em;
+      font-weight: bold;
+      margin-right: 0.5em;
+      font-size: 1em;
+      animation: markerPop 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+    }
+    @keyframes markerPop {
+      0% { transform: scale(0.5); opacity: 0; }
+      80% { transform: scale(1.2); opacity: 1; }
+      100% { transform: scale(1);}
+    }
+    /* RSVP Form */
+    .rsvp-form {
+      background: #fff8e1;
+      border-radius: 16px;
+      box-shadow: 0 2px 12px #ffd18044;
+      padding: 2rem 1.5rem;
+      max-width: 420px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      animation: fadeIn 2s 1.2s backwards;
+    }
+    .rsvp-form label {
+      font-weight: bold;
+      color: #b71c1c;
+      margin-bottom: 0.2em;
+      text-align: left;
+      display: block;
+    }
+    .rsvp-form input, .rsvp-form textarea, .rsvp-form select {
+      width: 100%;
+      padding: 0.7rem;
+      border-radius: 8px;
+      border: 1px solid #ffd180;
+      font-size: 1em;
+      margin-bottom: 0.2em;
+      font-family: inherit;
+      background: #fff;
+      transition: border 0.2s;
+    }
+    .rsvp-form input:focus, .rsvp-form textarea:focus {
+      border: 1.5px solid #d72638;
+      outline: none;
+    }
+    .rsvp-form button {
+      padding: 0.8rem 2rem;
+      background: linear-gradient(90deg, #ff9800 0%, #f44336 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ffd18055;
+    }
+    .rsvp-form button:hover {
+      background: linear-gradient(90deg, #f44336 0%, #ff9800 100%);
+      transform: scale(1.05);
+    }
+    .rsvp-success {
+      color: #388e3c;
+      font-weight: bold;
+      margin-top: 1em;
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s;
+    }
+    .music-toggle {
+      display: block;
+      margin: 1rem auto;
+      text-align: center;
+    }
+    .music-toggle button {
+      padding: 0.7rem 2rem;
+      background: linear-gradient(90deg,#43a047 0%,#00bcd4 100%);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      font-size: 1em;
+      font-weight: bold;
+      margin-top: 0.5rem;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .music-toggle button:hover {
+      background: linear-gradient(90deg,#00bcd4 0%,#43a047 100%);
+      transform: scale(1.05);
+    }
+    .guestbook {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2.5rem;
+      margin-top: 2.5rem;
+      animation: fadeIn 2s 1.3s backwards;
+    }
+    .guestbook h2 {
+      margin-bottom: 1rem;
+      color: #b71c1c;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2em;
+      letter-spacing: 1px;
+      text-shadow: 0 2px 8px #ffd180;
+    }
+    .guestbook textarea {
+      width: 100%;
+      max-width: 400px;
+      min-width: 220px;
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1.5px solid #ffd180;
+      font-size: 1.1em;
+      margin-bottom: 1rem;
+      background: #fffde7;
+      font-family: inherit;
+      transition: border 0.2s;
+      box-shadow: 0 2px 8px #ffd18044;
+    }
+    .guestbook textarea:focus {
+      border: 1.5px solid #d72638;
+      outline: none;
+    }
+    .guestbook button {
+      padding: 0.7rem 2rem;
+      background: linear-gradient(90deg, #f44336 0%, #ff9800 100%);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1em;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 8px #ffd18055;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .guestbook button:hover {
+      background: linear-gradient(90deg, #ff9800 0%, #f44336 100%);
+      transform: scale(1.05);
+    }
+    .guestbook .bless-success {
+      color: #388e3c;
+      font-weight: bold;
+      margin-top: 1em;
+      text-align: center;
+      display: none;
+      animation: fadeIn 1s;
+    }
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: #f8f8f8;
+      border-radius: 32px 32px 0 0;
+      margin-top: 2rem;
+      font-size: 1.1em;
+      color: #7b3f00;
+      box-shadow: 0 -4px 24px rgba(255, 183, 77, 0.13);
+    }
+    iframe {
+      width: 100%;
+      height: 300px;
+      border: none;
+      margin-top: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px #ffd180;
+    }
+    @media (max-width: 700px) {
+      main {
+        padding: 1rem 0.2rem;
+      }
+      .couple-row {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+      .person img {
+        width: 80px;
+        height: 80px;
+      }
+      .rsvp-form {
+        padding: 1rem 0.5rem;
+      }
+    }
+    @media (max-width: 600px) {
+      .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      header, main, footer {
+        border-radius: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="confetti"></canvas>
+  <canvas class="hearts"></canvas>
+  <canvas class="flowers"></canvas>
+  <header>
+    <h1 id="title">You're Invited!</h1>
+    <select id="languageSelector">
+      <option value="en">English</option>
+      <option value="te">తెలుగు</option>
+      <option value="hi">हिंदी</option>
+      <option value="ta">தமிழ்</option>
+      <option value="kn">ಕನ್ನಡ</option>
+    </select>
+    <div class="countdown" id="countdown"></div>
+  </header>
+  <main>
+    <div class="couple-row">
+      <div class="person">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Bride">
+        <div class="person-name">పీ.శ్రీనిధి షట్టీ</div>
+      </div>
+      <span class="and">&</span>
+      <div class="person">
+        <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Groom">
+        <div class="person-name">పి.అవినాష్</div>
+      </div>
+    </div>
+    <section class="story">
+      <h2 id="story-title">Our Love Story</h2>
+      <p id="story-text">We met, we laughed, we fell in love — and now we’re getting married!</p>
+    </section>
+    <section class="event">
+      <h2 id="event-title">Wedding Details</h2>
+      <div class="venue">
+        <p><span class="marker">📍</span><strong>Venue:</strong> Joseph Peta Village, Nellore District, Andhra Pradesh</p>
+        <p><strong>Date:</strong> 1 September 2029 (Saturday)</p>
+        <p><strong>Time:</strong> 6:00 PM onwards</p>
+        <p><strong>Dress Code:</strong> Traditional</p>
+      </div>
+      <iframe src="https://www.google.com/maps?q=Joseph+Peta+Village,+Nellore,+Andhra+Pradesh&output=embed" allowfullscreen title="Joseph Peta Map"></iframe>
+    </section>
+    <section class="gallery">
+      <h2 id="gallery-title">Photo Gallery</h2>
+      <div>
+        <img src="https://imgs.search.brave.com/H_R6S9pbQwmAHGt3GoCn0PzbciascQAzuRv8Zr6JZOI/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9tdW0t/b2JqZWN0c3RvcmUu/ZTJlbmV0d29ya3Mu/bmV0L3RyaW5nY29p/bi9BX0xpc3RfU3Rh/ci9wYXdhbi1rYWx5/YW4tdGhpcmQtd2lm/ZS5wbmc" alt="Gallery Photo 1">
+        <img src="https://imgs.search.brave.com/a90XIXjCfgBJiOiU18DUcH8SqolwMDtmXbpLlCqENH4/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9hbGx3/aWtpYmlvZ3JhcGh5/LmluL3dwLWNvbnRl/bnQvdXBsb2Fkcy8y/MDIzLzAyL1Bhd2Fu/LUthbHlhbi1TZWNv/bmQtTWFycmlhZ2Uu/anBn" alt="Gallery Photo 2">
+        <img src="https://imgs.search.brave.com/n5xHONHMStQm1AOOF_Aboj1IAHQNBqRPof0lksTqrDc/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly9zdGFy/em9uZS5yYWdhbGFo/YXJpLmNvbS9mZWIy/MDExL3N0YXJ6b25l/L3RlZW5tYWFyLXBh/d2FuLWthbHlhbi1m/aWxtL3RlZW5tYWFy/LXBhd2FuLWthbHlh/bi1maWxtdGh1bWIu/anBn" alt="Gallery Photo 3">
+      </div>
+    </section>
+    <section class="music-toggle">
+      <audio id="bgMusic" loop>
+        <source src="https://www.naasongs.co/c/marriage-songs-telugu-films-songs.html#" type="audio/mp3">
+      </audio>
+      <button onclick="toggleMusic()">Toggle Music</button>
+    </section>
+    <section class="rsvp">
+      <h2 id="rsvp-title">RSVP</h2>
+      <form class="rsvp-form" id="rsvpForm" autocomplete="off" onsubmit="return submitRSVP()">
+        <label for="rsvpName">Your Name</label>
+        <input type="text" id="rsvpName" name="rsvpName" required placeholder="Enter your name" />
+        <label for="rsvpGuests">No. of Guests</label>
+        <select id="rsvpGuests" name="rsvpGuests" required>
+          <option value="">Select</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4+">4+</option>
+        </select>
+        <label for="rsvpMsg">Message</label>
+        <textarea id="rsvpMsg" name="rsvpMsg" rows="3" placeholder="Write a message or wish..."></textarea>
+        <button type="submit">Send RSVP</button>
+        <div class="rsvp-success" id="rsvpSuccess">Thank you for your RSVP! See you at the wedding!</div>
+      </form>
+    </section>
+    <section class="guestbook">
+      <h2 id="guestbook-title">Leave a Wedding Wish</h2>
+      <textarea rows="3" id="blessings" placeholder="Write your blessings here..."></textarea>
+      <button onclick="postBlessing()">Post Wish</button>
+      <div class="bless-success" id="blessSuccess">Thank you for your blessings!</div>
+    </section>
+  </main>
+  <footer>
+    <p>Made with ❤️ by the couple</p>
+    <p>Follow us: 
+      <a href="https://www.instagram.com/_anonymous_official_00?igsh=dmp3d3hia2E0eXln">insta</a> |
+      <a href="">Facebook</a> |
+      <a href="https://www.youtube.com/">YouTube</a>
+    </p>
+  </footer>
+  <script>
+    // Countdown
+    const targetDate = new Date("2029-09-01T18:00:00").getTime();
+    const countdown = document.getElementById("countdown");
+    setInterval(() => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      countdown.innerHTML = `⏳ ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
+
+    // Music toggle
+    let playing = false;
+    const music = document.getElementById("bgMusic");
+    function toggleMusic() {
+      playing = !playing;
+      playing ? music.play() : music.pause();
+    }
+
+    // Language Switcher
+    const translations = {
+      te: {
+        title: "మీరు మా పెళ్లికి ఆహ్వానితులయ్యారు!",
+        "story-title": "మా ప్రేమ కథ",
+        "story-text": "మేము కలుసుకున్నాం, నవ్వాము, ప్రేమలో పడ్డాము — ఇప్పుడు పెళ్లి చేసుకుంటున్నాము!",
+        "event-title": "వివాహ వివరాలు",
+        "gallery-title": "ఫోటో గ్యాలరీ",
+        "rsvp-title": "RSVP ఫారం",
+        "guestbook-title": "మీ శుభాకాంక్షలు వ్రాయండి"
+      },
+      hi: {
+        title: "आप हमारे विवाह समारोह में आमंत्रित हैं!",
+        "story-title": "हमारी प्रेम कहानी",
+        "story-text": "हम मिले, मुस्कुराए, प्यार हुआ — अब शादी करने जा रहे हैं!",
+        "event-title": "विवाह विवरण",
+        "gallery-title": "फोटो गैलरी",
+        "rsvp-title": "RSVP फॉर्म",
+        "guestbook-title": "अपनी शुभकामनाएं लिखें"
+      },
+      ta: {
+        title: "நீங்கள் எங்கள் திருமணத்திற்கு வரவேற்கப்படுகிறீர்கள்!",
+        "story-title": "எங்கள் காதல் கதை",
+        "story-text": "நாம் சந்தித்தோம், நகைத்தோம், காதலித்தோம் — இப்போது திருமணம்!",
+        "event-title": "திருமண விவரங்கள்",
+        "gallery-title": "புகைப்படத் தொகுப்பு",
+        "rsvp-title": "RSVP படிவம்",
+        "guestbook-title": "உங்கள் வாழ்த்துகளை எழுதுங்கள்"
+      },
+      kn: {
+        title: "ನೀವು ನಮ್ಮ ಮದುವೆಗೆ ಆಹ್ವಾನಿತರಾಗಿದ್ದೀರಿ!",
+        "story-title": "ನಮ್ಮ ಪ್ರೀತಿಯ ಕಥೆ",
+        "story-text": "ನಾವು ಭೇಟಿಯಾದೆವು, ನಗುತ ಹೋದೆವು, ಪ್ರೀತಿಸಿದರು — ಈಗ ಮದುವೆಯಾಗುತ್ತಿದ್ದೇವೆ!",
+        "event-title": "ಮದುವೆ ವಿವರಗಳು",
+        "gallery-title": "ಫೋಟೋ ಗ್ಯಾಲರಿ",
+        "rsvp-title": "RSVP ಫಾರ್ಮ್",
+        "guestbook-title": "ನಿಮ್ಮ ಶುಭಾಶಯಗಳನ್ನು ಬರೆಹಿಸಿ"
+      },
+      en: {
+        title: "You're Invited!",
+        "story-title": "Our Love Story",
+        "story-text": "We met, we laughed, we fell in love — and now we’re getting married!",
+        "event-title": "Wedding Details",
+        "gallery-title": "Photo Gallery",
+        "rsvp-title": "RSVP",
+        "guestbook-title": "Leave a Wedding Wish"
+      }
+    };
+    document.getElementById("languageSelector").addEventListener("change", function () {
+      const lang = this.value;
+      const t = translations[lang];
+      for (const id in t) {
+        const el = document.getElementById(id);
+        if (el) el.innerText = t[id];
+      }
+    });
+
+    // Confetti Animation
+    const canvas = document.querySelector('.confetti');
+    const ctx = canvas.getContext('2d');
+    let W = window.innerWidth, H = window.innerHeight;
+    canvas.width = W; canvas.height = H;
+    const confettiColors = ['#ff9800','#f44336','#ffd600','#43a047','#e040fb','#00bcd4'];
+    let confetti = [];
+    for(let i=0;i<100;i++){
+      confetti.push({
+        x: Math.random()*W,
+        y: Math.random()*H - H,
+        r: Math.random()*8+4,
+        d: Math.random()*80+40,
+        color: confettiColors[Math.floor(Math.random()*confettiColors.length)],
+        tilt: Math.random()*10-10,
+        speed: Math.random()*1.5+1
+      });
+    }
+    function drawConfetti(){
+      ctx.clearRect(0,0,W,H);
+      for(let i=0;i<confetti.length;i++){
+        let c = confetti[i];
+        ctx.save();
+        ctx.globalAlpha = 0.85;
+        ctx.beginPath();
+        ctx.ellipse(c.x, c.y, c.r, c.r/2, c.tilt, 0, 2*Math.PI);
+        ctx.fillStyle = c.color;
+        ctx.shadowColor = c.color;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.restore();
+      }
+      updateConfetti();
+    }
+    function updateConfetti(){
+      for(let i=0;i<confetti.length;i++){
+        let c = confetti[i];
+        c.y += Math.cos(c.d) + 2 + c.r/5 + c.speed;
+        c.x += Math.sin(c.d) * 1.2;
+        c.tilt += Math.random()*0.2-0.1;
+        if(c.y > H){
+          c.y = -10;
+          c.x = Math.random()*W;
+        }
+      }
+    }
+    setInterval(drawConfetti, 30);
+    window.addEventListener('resize', ()=>{
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W; canvas.height = H;
+      heartsCanvas.width = W; heartsCanvas.height = H;
+      flowersCanvas.width = W; flowersCanvas.height = H;
+    });
+
+    // Hearts Animation
+    const heartsCanvas = document.querySelector('.hearts');
+    const heartsCtx = heartsCanvas.getContext('2d');
+    heartsCanvas.width = W; heartsCanvas.height = H;
+    let hearts = [];
+    function randomHeartColor() {
+      const colors = ['#e57373','#f06292','#f44336','#ff80ab','#ff1744','#ad1457'];
+      return colors[Math.floor(Math.random()*colors.length)];
+    }
+    for(let i=0;i<25;i++){
+      hearts.push({
+        x: Math.random()*W,
+        y: H + Math.random()*H,
+        size: Math.random()*24+18,
+        speed: Math.random()*1.2+0.5,
+        drift: Math.random()*1.5-0.75,
+        color: randomHeartColor(),
+        alpha: Math.random()*0.5+0.5
+      });
+    }
+    function drawHeart(ctx, x, y, size, color, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.beginPath();
+      ctx.moveTo(x, y + size/4);
+      ctx.bezierCurveTo(x, y, x - size/2, y, x - size/2, y + size/4);
+      ctx.bezierCurveTo(x - size/2, y + size/2, x, y + size*0.8, x, y + size);
+      ctx.bezierCurveTo(x, y + size*0.8, x + size/2, y + size/2, x + size/2, y + size/4);
+      ctx.bezierCurveTo(x + size/2, y, x, y, x, y + size/4);
+      ctx.closePath();
+      ctx.fillStyle = color;
+      ctx.shadowColor = color;
+      ctx.shadowBlur = 8;
+      ctx.fill();
+      ctx.restore();
+    }
+    function drawHearts(){
+      heartsCtx.clearRect(0,0,W,H);
+      for(let i=0;i<hearts.length;i++){
+        let h = hearts[i];
+        drawHeart(heartsCtx, h.x, h.y, h.size, h.color, h.alpha);
+        h.y -= h.speed;
+        h.x += h.drift;
+        if(h.y < -40){
+          h.y = H + 40;
+          h.x = Math.random()*W;
+          h.size = Math.random()*24+18;
+          h.color = randomHeartColor();
+          h.alpha = Math.random()*0.5+0.5;
+        }
+      }
+    }
+    setInterval(drawHearts, 40);
+
+    // Flowers Animation
+    const flowersCanvas = document.querySelector('.flowers');
+    const flowersCtx = flowersCanvas.getContext('2d');
+    flowersCanvas.width = W; flowersCanvas.height = H;
+    let flowers = [];
+    function randomFlowerColor() {
+      const colors = ['#ffd600','#ffb300','#ff8a65','#f06292','#ba68c8','#81c784','#fff176'];
+      return colors[Math.floor(Math.random()*colors.length)];
+    }
+    for(let i=0;i<18;i++){
+      flowers.push({
+        x: Math.random()*W,
+        y: -Math.random()*H,
+        size: Math.random()*22+16,
+        speed: Math.random()*1.1+0.5,
+        drift: Math.random()*1.2-0.6,
+        color: randomFlowerColor(),
+        petal: Math.floor(Math.random()*3)+5,
+        alpha: Math.random()*0.5+0.5
+      });
+    }
+    function drawFlower(ctx, x, y, size, color, petal, alpha) {
+      ctx.save();
+      ctx.globalAlpha = alpha;
+      ctx.translate(x, y);
+      for(let i=0;i<petal;i++){
+        ctx.rotate((2*Math.PI)/petal);
+        ctx.beginPath();
+        ctx.ellipse(0, size/3, size/3, size/1.8, 0, 0, 2*Math.PI);
+        ctx.fillStyle = color;
+        ctx.shadowColor = color;
+        ctx.shadowBlur = 6;
+        ctx.fill();
+      }
+      ctx.beginPath();
+      ctx.arc(0,0,size/5,0,2*Math.PI);
+      ctx.fillStyle = "#fffde7";
+      ctx.fill();
+      ctx.restore();
+    }
+    function drawFlowers(){
+      flowersCtx.clearRect(0,0,W,H);
+      for(let i=0;i<flowers.length;i++){
+        let f = flowers[i];
+        drawFlower(flowersCtx, f.x, f.y, f.size, f.color, f.petal, f.alpha);
+        f.y += f.speed;
+        f.x += f.drift;
+        if(f.y > H+40){
+          f.y = -40;
+          f.x = Math.random()*W;
+          f.size = Math.random()*22+16;
+          f.color = randomFlowerColor();
+          f.petal = Math.floor(Math.random()*3)+5;
+          f.alpha = Math.random()*0.5+0.5;
+        }
+      }
+    }
+    setInterval(drawFlowers, 50);
+
+    // RSVP Form
+    function submitRSVP() {
+      document.getElementById('rsvpSuccess').style.display = 'block';
+      setTimeout(() => {
+        document.getElementById('rsvpForm').reset();
+        document.getElementById('rsvpSuccess').style.display = 'none';
+      }, 2500);
+      return false;
+    }
+
+    // Blessings (Guestbook) Form
+    function postBlessing() {
+      const textarea = document.getElementById('blessings');
+      const success = document.getElementById('blessSuccess');
+      if (textarea.value.trim() !== "") {
+        success.style.display = 'block';
+        setTimeout(() => {
+          textarea.value = "";
+          success.style.display = 'none';
+        }, 2500);
+      }
+    }
+
+    // Responsive canvas
+    window.addEventListener('resize', ()=>{
+      W = window.innerWidth; H = window.innerHeight;
+      canvas.width = W; canvas.height = H;
+      heartsCanvas.width = W; heartsCanvas.height = H;
+      flowersCanvas.width = W; flowersCanvas.height = H;
+    });
+  </script>
+</body>
+</html>
